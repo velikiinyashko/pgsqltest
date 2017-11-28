@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using pgsqltest.Models;
 
 namespace pgsqltest
 {
@@ -20,9 +22,18 @@ namespace pgsqltest
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Context _db = new Context();
+
+        public List<Users> Users;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public void WindowLoads(object sender, RoutedEventArgs e)
+        {
+            Users = _db.Users.ToList();
         }
     }
 }
